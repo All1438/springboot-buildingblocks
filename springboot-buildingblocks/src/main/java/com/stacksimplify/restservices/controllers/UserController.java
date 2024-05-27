@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -22,7 +23,11 @@ import com.stacksimplify.restservices.exceptions.UserExistsException;
 import com.stacksimplify.restservices.exceptions.UserNotFoundException;
 import com.stacksimplify.restservices.services.UserService;
 
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.Min;
+
 @RestController
+@Validated
 public class UserController {
 
     @Autowired
@@ -36,7 +41,8 @@ public class UserController {
 
     // Create User Method
     @PostMapping("/user")
-    public ResponseEntity<Void> createUser(@RequestBody User user, UriComponentsBuilder builder) {
+    public ResponseEntity<Void> createUser(@Valid @RequestBody User user, UriComponentsBuilder builder) {
+        // @Valid = pour que les validation sont accépté dans entity
         // UriComponentsBuilder = est utilisé pour construire l'URL de la ressource
         // nouvellement créée
         try {
@@ -60,7 +66,8 @@ public class UserController {
 
     // Get UserById
     @GetMapping("/users/{id}")
-    public Optional<User> getUserById(@PathVariable("id") Long id) {
+    public Optional<User> getUserById(@PathVariable("id") @Min(1) Long id) {
+        // @Min(1) = pour dire que les nombres de valeur entrer doit être suppérieur à 1
         try {
             return userService.getUserById(id);
         } catch (UserNotFoundException ex) {
