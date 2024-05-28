@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -26,21 +27,22 @@ import com.stacksimplify.restservices.services.UserService;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Min;
 
-@RestController
+@RestController // @RestController = décorateur pour dire que c'est du Controller
 @Validated
+@RequestMapping(value = "/users") // @RequestMapping() = permet de définir une URL de base
 public class UserController {
 
-    @Autowired
+    @Autowired // @Autowired = simplifie la gestion des dépendances en injectant auto les beans appropriés dans les champs. ici c'est les dépendances de UserService
     private UserService userService;
 
     // Read All User
-    @GetMapping("/users")
+    @GetMapping
     public List<User> getAllUsers() {
         return userService.getAllUsers();
     }
 
     // Create User Method
-    @PostMapping("/user")
+    @PostMapping
     public ResponseEntity<Void> createUser(@Valid @RequestBody User user, UriComponentsBuilder builder) {
         // @Valid = pour que les validation sont accépté dans entity
         // UriComponentsBuilder = est utilisé pour construire l'URL de la ressource
@@ -65,7 +67,7 @@ public class UserController {
     }
 
     // Get UserById
-    @GetMapping("/users/{id}")
+    @GetMapping("/{id}") // l'url sera "/users/{id}"
     public Optional<User> getUserById(@PathVariable("id") @Min(1) Long id) {
         // @Min(1) = pour dire que les nombres de valeur entrer doit être suppérieur à 1
         try {
@@ -76,7 +78,7 @@ public class UserController {
     }
 
     // Update User By Id
-    @PutMapping("/updateuser/{id}")
+    @PutMapping("/{id}")
     public User updateUserById(@PathVariable("id") Long id, @RequestBody User user) {
         try {
             return userService.updateUserById(id, user);
@@ -85,12 +87,12 @@ public class UserController {
         }
     }
 
-    @DeleteMapping("/deleteuser/{id}")
+    @DeleteMapping("/{id}")
     public void deleteUserById(@PathVariable("id") Long id) {
         userService.deleteUserById(id);
     }
 
-    @GetMapping("/user/username/{username}")
+    @GetMapping("/username/{username}")
     public User getUserByUsername(@PathVariable("username") String username) {
         return userService.getUserByUserName(username);
     }
