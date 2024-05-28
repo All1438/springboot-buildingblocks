@@ -23,12 +23,11 @@ public class OrderController {
 
     @Autowired
     private UserRepository userRepository;
-    
+
     @Autowired
     private OrderRepository orderRepository;
 
     // get All Orders for a user
-
     @GetMapping("/{userid}/orders")
     public List<Order> getAllOrders(@PathVariable Long userid) throws UserNotFoundException {
         Optional<User> userOptional = userRepository.findById(userid);

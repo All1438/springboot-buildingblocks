@@ -2,6 +2,8 @@ package com.stacksimplify.restservices.entities;
 
 import java.util.List;
 
+import org.springframework.hateoas.RepresentationModel;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -11,9 +13,11 @@ import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;
 
+
+
 @Entity
 @Table(name = "users")
-public class User {
+public class User extends RepresentationModel<User>{
 
     @Id
     @GeneratedValue
@@ -123,7 +127,7 @@ public class User {
     public void setOrders(List<Order> orders) {
         this.orders = orders;
     }
-    
+
     // To String
     @Override
     public String toString() {
