@@ -29,7 +29,7 @@ import jakarta.validation.constraints.Min;
 
 @RestController // @RestController = décorateur pour dire que c'est du Controller
 @Validated
-@RequestMapping(value = "/users") // @RequestMapping() = permet de définir une URL de base
+//@RequestMapping(value = "/users") // @RequestMapping() = permet de définir une URL de base
 public class UserController {
 
     @Autowired // @Autowired = simplifie la gestion des dépendances en injectant auto les beans appropriés dans les champs. ici c'est les dépendances de UserService
