@@ -9,6 +9,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonView;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -18,9 +19,10 @@ import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;
 
-
+// Swagger = pour générer de la documentation et tester des API RESTful
 
 @Entity
+@Schema(description = "This model is to create a user") // @Schema() = permet de faire une description dans l'api
 @Table(name = "users")
 // @JsonIgnoreProperties({"firstname", "lastname"}) // permet d'ignorer ces 2 fichiers
 // @JsonFilter(value = "userFilter") // qui sera connecté avec le JacksonController -- Used for MappingJacksonValue filtering section
@@ -31,12 +33,14 @@ public class User extends RepresentationModel<User>{
     @JsonView(Views.External.class)
     private Long userid;
 
+    @Size(min = 2, max = 50)
+    @Schema(description = "L'user name doit être unique", required = true, example = "Mousski") // indique dans l'API que required est égale à true et une example
     @NotEmpty(message = "Username is Mandatory field. Please provide username")
     @Column(name = "USER_NAME", length = 50, nullable = false, unique = true)
     @JsonView(Views.External.class)
     private String username;
 
-    @Size(min = 2, message = "FirstName should have atleast 2 characters")
+    @Size(min = 2, max = 50, message = "FirstName should have atleast 2 characters")
     @Column(name = "FIRST_NAME", length = 50, nullable = false)
     @JsonView(Views.External.class)
     private String firstname;
@@ -66,11 +70,15 @@ public class User extends RepresentationModel<User>{
     @JsonView(Views.Internal.class)
     private List<Order> orders;
 
+    @Column(name = "ADDRESS")
+    private String adress;
+
+    
     
     // No Argument Constructor
     public User() {
     }
-
+    
     // Field Constructor
     public User(Long userid, String username, String firstname, String lastname, String email, String role, String ssn) {
         this.userid = userid;
@@ -80,14 +88,23 @@ public class User extends RepresentationModel<User>{
         this.email = email;
         this.role = role;
         this.ssn = ssn;
+        this.adress = adress;
+    }
+
+    public String getAdress() {
+        return adress;
+    }
+
+    public void setAdress(String adress) {
+        this.adress = adress;
     }
     
     // Getters and Setters
-    public Long getId() {
+    public Long getUserid() {
         return userid;
     }
 
-    public void setId(Long userid) {
+    public void setUserid(Long userid) {
         this.userid = userid;
     }
     
@@ -151,7 +168,7 @@ public class User extends RepresentationModel<User>{
     @Override
     public String toString() {
         return "User [userid=" + userid + ", username=" + username + ", firstname=" + firstname + ", lastname=" + lastname
-                + ", email=" + email + ", role=" + role + ", ssn=" + ssn + "]";
+                + ", email=" + email + ", role=" + role + ", ssn=" + ssn + ", orders=" + orders  + ", adress=" + adress+ "]";
     }
 
 }

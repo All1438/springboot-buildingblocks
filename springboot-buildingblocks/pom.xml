@@ -63,13 +63,15 @@
 			<scope>test</scope>
 		</dependency>
 
-				<!-- https://mvnrepository.com/artifact/jakarta.validation/jakarta.validation-api -->
+		<!-- Jakarta Validation API -->
+		<!-- https://mvnrepository.com/artifact/jakarta.validation/jakarta.validation-api -->
 		<dependency>
 			<groupId>jakarta.validation</groupId>
 			<artifactId>jakarta.validation-api</artifactId>
 			<version>3.0.2</version>
 		</dependency>
 
+		<!-- PostgreSQL Driver -->
 		<!-- https://mvnrepository.com/artifact/org.postgresql/postgresql -->
 		<dependency>
 			<groupId>org.postgresql</groupId>
@@ -77,6 +79,7 @@
 			<version>42.7.3</version>
 		</dependency>
 
+		<!-- Jakarta Annotation API -->
 		<!-- https://mvnrepository.com/artifact/jakarta.annotation/jakarta.annotation-api -->
 		<dependency>
 			<groupId>jakarta.annotation</groupId>
@@ -84,6 +87,7 @@
 			<version>3.0.0</version>
 		</dependency>
 
+		<!-- ModelMapper -->
 		<!-- https://mvnrepository.com/artifact/org.modelmapper/modelmapper -->
 		<dependency>
 			<groupId>org.modelmapper</groupId>
@@ -91,6 +95,7 @@
 			<version>3.2.0</version>
 		</dependency>
 
+		<!-- MapStruct -->
 		<dependency>
 			<groupId>org.mapstruct</groupId>
 			<artifactId>mapstruct</artifactId>
@@ -104,6 +109,7 @@
         	<scope>provided</scope>
 		</dependency>
 
+		<!-- Lombok -->
 		<!-- Lombok dependency if you're using Lombok -->
 		<dependency>
 			<groupId>org.projectlombok</groupId>
@@ -111,6 +117,40 @@
 			<version>1.18.24</version>
 			<scope>provided</scope>
 		</dependency>
+
+		<!-- Jackson Dataformat YAML -->
+		<!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.dataformat/jackson-dataformat-yaml -->
+		<dependency>
+			<groupId>com.fasterxml.jackson.dataformat</groupId>
+			<artifactId>jackson-dataformat-yaml</artifactId>
+			<version>2.17.0</version>
+		</dependency>
+
+		<!-- Springdoc OpenAPI Starter WebMVC UI -->
+		<dependency>
+			<groupId>org.springdoc</groupId>
+			<artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+			<version>2.1.0</version>
+		</dependency>
+
+		<!-- Jakarta Servelet API -->
+		<!-- http://localhost:8080/swagger-ui/index.html -->
+		<!-- http://localhost:8080/v3/api-docs -->
+		<dependency>
+			<groupId>jakarta.servlet</groupId>
+			<artifactId>jakarta.servlet-api</artifactId>
+			<scope>provided</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springdoc</groupId>
+			<artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+			<version>2.1.0</version>
+		</dependency>
+		
+
+
+
 
  </dependencies>
 
